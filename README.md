@@ -1,6 +1,9 @@
 computer
 ========
 
+[![Build Status](https://travis-ci.org/despawnerer/computer.svg?branch=master)](https://travis-ci.org/despawnerer/computer)
+[![PyPI version](https://badge.fury.io/py/computer.svg)](https://badge.fury.io/py/computer)
+
 Perform calculations and comparisons from user input.
 
 
