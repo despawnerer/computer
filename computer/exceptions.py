@@ -6,7 +6,7 @@ class UndefinedVariable(NameError):
         return "variable '%s' is not defined" % self.name
 
 
-class UnsupportedOperation(Exception):
+class UnsupportedOperation(ValueError):
     def __init__(self, node):
         self.node = node
         self.operation_name = node.__class__.__name__
