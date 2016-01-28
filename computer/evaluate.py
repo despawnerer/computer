@@ -1,11 +1,16 @@
 import ast
 
-from .exceptions import UndefinedVariable, UnsupportedOperation
 from .operations import (
     operators,
     comparisons,
     boolean_operators,
     unary_operators,
+)
+
+from .exceptions import (
+    UndefinedVariable,
+    UnsupportedOperation,
+    BadExpression,
 )
 
 
@@ -24,7 +29,18 @@ def evaluate(expr, **variables):
     True
     """
     module = ast.parse(expr)  # Module(body=[Expr(value=...)])
-    return _eval(module.body[0].value, variables)
+    if len(module.body) != 1:
+        raise BadExpression(
+            "One expression expected, got %d." % len(module.body))
+
+    expression = module.body[0]
+    if not isinstance(expression, ast.Expr):
+        raise BadExpression(
+            "Expression expected, got %s instead."
+            % expression.__class__.__name__
+        )
+
+    return _eval(expression.value, variables)
 
 
 def _eval(node, context):

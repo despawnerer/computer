@@ -1,6 +1,11 @@
 from unittest import TestCase
 
-from computer import evaluate, UndefinedVariable, UnsupportedOperation
+from computer import (
+    evaluate,
+    BadExpression,
+    UndefinedVariable,
+    UnsupportedOperation,
+)
 
 
 class BasicMathTestCase(TestCase):
@@ -97,3 +102,13 @@ class UnsupportedOperationsTestCase(TestCase):
     def test_items(self):
         with self.assertRaises(UnsupportedOperation):
             evaluate('b[0]', b=5)
+
+
+class BadExpressionsTestCase(TestCase):
+    def test_multiple_expressions(self):
+        with self.assertRaises(BadExpression):
+            evaluate('5 + 5; 2 + 2')
+
+    def test_non_expression_code(self):
+        with self.assertRaises(BadExpression):
+            evaluate('a = 5')

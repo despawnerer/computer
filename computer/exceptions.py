@@ -13,3 +13,7 @@ class UnsupportedOperation(Exception):
 
     def __str__(self):
         return "%s operations are not supported" % self.operation_name
+
+
+class BadExpression(ValueError):
+    pass
